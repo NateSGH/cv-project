@@ -10,7 +10,7 @@ function GeneralInfo(props) {
           type="text"
           value={props.fullName}
           placeholder="Enter your full name"
-          onChange={props.handleInputChange.bind(this)}
+          onChange={props.handleInputChange}
         />
       </label>
 
@@ -21,8 +21,8 @@ function GeneralInfo(props) {
           type="tel"
           value={props.phoneNumber}
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          placeholder="Enter your phone number"
-          onChange={props.handleInputChange.bind(this)}
+          placeholder="Enter your phone number: 123-456-7890"
+          onChange={props.handleInputChange}
         />
       </label>
 
@@ -33,7 +33,7 @@ function GeneralInfo(props) {
           type="email"
           value={props.email}
           placeholder="Enter your email"
-          onChange={props.handleInputChange.bind(this)}
+          onChange={props.handleInputChange}
         />
       </label>
     </div>
