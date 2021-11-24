@@ -21,7 +21,7 @@ function GeneralInfo(props) {
           type="tel"
           value={props.phoneNumber}
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          placeholder="Enter your phone number: 123-456-7890"
+          placeholder="123-456-7890"
           onChange={props.handleInputChange}
         />
       </label>

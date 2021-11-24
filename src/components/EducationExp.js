@@ -44,6 +44,8 @@ function EducationExp(props) {
           onChange={props.handleInputChange}
         ></input>
       </label>
+
+      <button>Delete</button>
     </div>
   );
 }

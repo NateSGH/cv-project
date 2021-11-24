@@ -1,51 +1,79 @@
 import React from 'react';
 
-function WorkExp(props) {
-  return (
-    <div>
-      <label>
-        Company Name:
-        <input
-          name="companyName"
-          type="text"
-          value={props.companyName}
-          placeholder="Enter your company name"
-          onChange={props.handleInputChange}
-        ></input>
-      </label>
+class WorkExp extends React.Component {
+  constructor(props) {
+    super(props);
 
-      <label>
-        Position Title:
-        <input
-          name="positionTitle"
-          type="text"
-          value={props.positionTitle}
-          placeholder="Enter your position title"
-          onChange={props.handleInputChange}
-        ></input>
-      </label>
+    this.state = {
+      companyName: '',
+      positionTitle: '',
+      workFrom: '',
+      workTo: '',
+    };
 
-      <label>
-        From:
-        <input
-          name="workFrom"
-          type="text"
-          value={props.workFrom}
-          onChange={props.handleInputChange}
-        ></input>
-      </label>
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-      <label>
-        To:
-        <input
-          name="workTo"
-          type="text"
-          value={props.workTo}
-          onChange={props.handleInputChange}
-        ></input>
-      </label>
-    </div>
-  );
+  handleInputChange = (event) => {
+    console.log(event.target);
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <label>
+          Company Name:
+          <input
+            name="companyName"
+            type="text"
+            value={this.state.companyName}
+            placeholder="Enter your company name"
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
+
+        <label>
+          Position Title:
+          <input
+            name="positionTitle"
+            type="text"
+            value={this.state.positionTitle}
+            placeholder="Enter your position title"
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
+
+        <label>
+          From:
+          <input
+            name="workFrom"
+            type="text"
+            value={this.state.workFrom}
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
+
+        <label>
+          To:
+          <input
+            name="workTo"
+            type="text"
+            value={this.state.workTo}
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
+
+        <button>Delete</button>
+      </div>
+    );
+  }
 }
 
 export default WorkExp;
