@@ -12,6 +12,7 @@ class WorkExp extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleDeletion = this.handleDeletion.bind(this);
   }
 
   handleInputChange = (event) => {
@@ -23,6 +24,10 @@ class WorkExp extends React.Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  handleDeletion = () => {
+    this.props.delete(this.props.id);
   };
 
   render() {
@@ -70,7 +75,9 @@ class WorkExp extends React.Component {
           ></input>
         </label>
 
-        <button>Delete</button>
+        <button type="button" onClick={this.handleDeletion}>
+          Delete
+        </button>
       </div>
     );
   }

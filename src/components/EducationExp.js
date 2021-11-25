@@ -45,7 +45,7 @@ function EducationExp(props) {
         ></input>
       </label>
 
-      <button>Delete</button>
+      <button type="button">Delete</button>
     </div>
   );
 }

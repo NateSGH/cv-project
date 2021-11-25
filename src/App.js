@@ -20,11 +20,13 @@ class App extends React.Component {
       studyTitle: '',
       studyFrom: '',
       studyTo: '',
+      workExpComponents: [{ id: 1 }],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addWorkExpSection = this.addWorkExpSection.bind(this);
+    this.deleteWorkExpSection = this.deleteWorkExpSection.bind(this);
   }
 
   handleInputChange = (event) => {
@@ -52,8 +54,33 @@ class App extends React.Component {
 
   addWorkExpSection() {
     console.log('Add clicked');
-    return <WorkExp />;
+    this.setState((state) => {
+      let componentId = state.workExpComponents[state.workExpComponents.length - 1].id + 1;
+      console.log(componentId);
+
+      return {
+        workExpComponents: state.workExpComponents.concat([{ id: componentId }]),
+      };
+    });
   }
+
+  deleteWorkExpSection = (id) => {
+    console.log(id);
+
+    function checkId(component) {
+      return component.id === id;
+    }
+
+    this.setState((state) => {
+      const index = state.workExpComponents.findIndex(checkId);
+      const componentsArr = state.workExpComponents.slice();
+      componentsArr.splice(index, 1);
+
+      return {
+        workExpComponents: componentsArr,
+      };
+    });
+  };
 
   render() {
     return (
@@ -71,13 +98,10 @@ class App extends React.Component {
             </div>
             <div className="workInfo">
               <h2>Work Experience</h2>
-              <WorkExp
-              // companyName={this.state.companyName}
-              // positionTitle={this.state.positionTitle}
-              // workFrom={this.state.workFrom}
-              // workTo={this.state.workTo}
-              // handleInputChange={this.handleInputChange}
-              />
+
+              {this.state.workExpComponents.map((item) => (
+                <WorkExp key={item.id} id={item.id} delete={this.deleteWorkExpSection} />
+              ))}
               <button type="button" onClick={this.addWorkExpSection}>
                 Add
               </button>
