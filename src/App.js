@@ -3,6 +3,7 @@ import GeneralInfo from './components//GeneralInfo';
 import WorkExp from './components/WorkExp';
 import EducationExp from './components/EducationExp';
 import React from 'react';
+import './styles/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -87,8 +88,8 @@ class App extends React.Component {
       <div className="App">
         <Header title="CV Application" />
         <div className="main-content">
-          <form onSubmit={this.handleSubmit}>
-            <div className="genInfo">
+          <form className="cv-form" onSubmit={this.handleSubmit}>
+            <div className="general-info">
               <GeneralInfo
                 fullName={this.state.fullName}
                 phoneNumber={this.state.phoneNumber}
@@ -96,18 +97,19 @@ class App extends React.Component {
                 handleInputChange={this.handleInputChange}
               />
             </div>
-            <div className="workInfo">
+            <div className="work-info">
               <h2>Work Experience</h2>
 
               {this.state.workExpComponents.map((item) => (
                 <WorkExp key={item.id} id={item.id} delete={this.deleteWorkExpSection} />
               ))}
-              <button type="button" onClick={this.addWorkExpSection}>
+              <button type="button" className="add-btn" onClick={this.addWorkExpSection}>
                 Add
               </button>
             </div>
-            <div>
+            <div className="education-info">
               <h2>Education Experience</h2>
+
               <EducationExp
                 schoolName={this.state.schoolName}
                 studyTitle={this.state.studyTitle}
@@ -115,7 +117,9 @@ class App extends React.Component {
                 studyTo={this.state.studyTo}
                 handleInputChange={this.handleInputChange}
               />
-              <button type="button">Add</button>
+              <button type="button" className="add-btn">
+                Add
+              </button>
             </div>
             <button type="submit">Submit</button>
           </form>

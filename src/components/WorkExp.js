@@ -32,50 +32,46 @@ class WorkExp extends React.Component {
 
   render() {
     return (
-      <div>
-        <label>
-          Company Name:
-          <input
-            name="companyName"
-            type="text"
-            value={this.state.companyName}
-            placeholder="Enter your company name"
-            onChange={this.handleInputChange}
-          ></input>
-        </label>
+      <div className="work-exp">
+        <label htmlFor="comp-name">Company Name:</label>
+        <input
+          id="comp-name"
+          name="companyName"
+          type="text"
+          value={this.state.companyName}
+          placeholder="Enter your company name"
+          onChange={this.handleInputChange}
+        ></input>
 
-        <label>
-          Position Title:
-          <input
-            name="positionTitle"
-            type="text"
-            value={this.state.positionTitle}
-            placeholder="Enter your position title"
-            onChange={this.handleInputChange}
-          ></input>
-        </label>
+        <label htmlFor="pos-title">Position Title:</label>
+        <input
+          id="pos-title"
+          name="positionTitle"
+          type="text"
+          value={this.state.positionTitle}
+          placeholder="Enter your position title"
+          onChange={this.handleInputChange}
+        ></input>
 
-        <label>
-          From:
-          <input
-            name="workFrom"
-            type="text"
-            value={this.state.workFrom}
-            onChange={this.handleInputChange}
-          ></input>
-        </label>
+        <label htmlFor="work-from">From:</label>
+        <input
+          id="work-from"
+          name="workFrom"
+          type="text"
+          value={this.state.workFrom}
+          onChange={this.handleInputChange}
+        ></input>
 
-        <label>
-          To:
-          <input
-            name="workTo"
-            type="text"
-            value={this.state.workTo}
-            onChange={this.handleInputChange}
-          ></input>
-        </label>
+        <label htmlFor="work-to">To:</label>
+        <input
+          id="work-to"
+          name="workTo"
+          type="text"
+          value={this.state.workTo}
+          onChange={this.handleInputChange}
+        ></input>
 
-        <button type="button" onClick={this.handleDeletion}>
+        <button type="button" className="delete-section" onClick={this.handleDeletion}>
           Delete
         </button>
       </div>
