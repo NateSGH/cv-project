@@ -13,21 +13,17 @@ class App extends React.Component {
       fullName: '',
       phoneNumber: '',
       email: '',
-      companyName: '',
-      positionTitle: '',
-      workFrom: '',
-      workTo: '',
-      schoolName: '',
-      studyTitle: '',
-      studyFrom: '',
-      studyTo: '',
       workExpComponents: [{ id: 1 }],
+      educationExpComponents: [{ id: 1 }],
+      submitted: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.addWorkExpSection = this.addWorkExpSection.bind(this);
-    this.deleteWorkExpSection = this.deleteWorkExpSection.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.addWorkExp = this.addWorkExp.bind(this);
+    this.addEducationExp = this.addEducationExp.bind(this);
+    this.deleteExp = this.deleteExp.bind(this);
   }
 
   handleInputChange = (event) => {
@@ -41,23 +37,19 @@ class App extends React.Component {
     });
   };
 
-  counter() {
-    let count = 0;
-    return function () {
-      return (count += 1);
-    };
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     console.log('You clicked submit.');
+    this.setState({ submitted: true });
   }
 
-  addWorkExpSection() {
-    console.log('Add clicked');
+  handleEdit() {
+    this.setState({ submitted: false });
+  }
+
+  addWorkExp() {
     this.setState((state) => {
       let componentId = state.workExpComponents[state.workExpComponents.length - 1].id + 1;
-      console.log(componentId);
 
       return {
         workExpComponents: state.workExpComponents.concat([{ id: componentId }]),
@@ -65,21 +57,42 @@ class App extends React.Component {
     });
   }
 
-  deleteWorkExpSection = (id) => {
-    console.log(id);
+  addEducationExp() {
+    this.setState((state) => {
+      let componentId =
+        state.educationExpComponents[state.educationExpComponents.length - 1].id + 1;
 
+      return {
+        educationExpComponents: state.educationExpComponents.concat([{ id: componentId }]),
+      };
+    });
+  }
+
+  deleteExp = (section, id) => {
     function checkId(component) {
       return component.id === id;
     }
 
+    let stateSection = '';
     this.setState((state) => {
-      const index = state.workExpComponents.findIndex(checkId);
-      const componentsArr = state.workExpComponents.slice();
+      if (section === 'work') {
+        stateSection = state.workExpComponents;
+      } else if (section === 'education') {
+        stateSection = state.educationExpComponents;
+      }
+      const index = stateSection.findIndex(checkId);
+      const componentsArr = stateSection.slice();
       componentsArr.splice(index, 1);
 
-      return {
-        workExpComponents: componentsArr,
-      };
+      if (section === 'work') {
+        return {
+          workExpComponents: componentsArr,
+        };
+      } else {
+        return {
+          educationExpComponents: componentsArr,
+        };
+      }
     });
   };
 
@@ -101,27 +114,38 @@ class App extends React.Component {
               <h2>Work Experience</h2>
 
               {this.state.workExpComponents.map((item) => (
-                <WorkExp key={item.id} id={item.id} delete={this.deleteWorkExpSection} />
+                <WorkExp
+                  key={item.id}
+                  id={item.id}
+                  delete={this.deleteExp}
+                  submitted={this.state.submitted}
+                />
               ))}
-              <button type="button" className="add-btn" onClick={this.addWorkExpSection}>
-                Add
-              </button>
+              {this.state.submitted === false && (
+                <button type="button" className="add-btn" onClick={this.addWorkExp}>
+                  Add
+                </button>
+              )}
             </div>
             <div className="education-info">
               <h2>Education Experience</h2>
 
-              <EducationExp
-                schoolName={this.state.schoolName}
-                studyTitle={this.state.studyTitle}
-                studyFrom={this.state.studyFrom}
-                studyTo={this.state.studyTo}
-                handleInputChange={this.handleInputChange}
-              />
-              <button type="button" className="add-btn">
+              {this.state.educationExpComponents.map((item) => (
+                <EducationExp
+                  key={item.id}
+                  id={item.id}
+                  delete={this.deleteExp}
+                  submitted={this.state.submitted}
+                />
+              ))}
+              <button type="button" className="add-btn" onClick={this.addEducationExp}>
                 Add
               </button>
             </div>
             <button type="submit">Submit</button>
+            <button type="button" onClick={this.handleEdit}>
+              Edit
+            </button>
           </form>
           <p>{this.state.fullName}</p>
         </div>

@@ -27,10 +27,18 @@ class WorkExp extends React.Component {
   };
 
   handleDeletion = () => {
-    this.props.delete(this.props.id);
+    this.props.delete('work', this.props.id);
   };
 
   render() {
+    if (this.props.submitted) {
+      return (
+        <div className="work-exp">
+          <p>Company Name:</p>
+          <p>{this.state.companyName}</p>
+        </div>
+      );
+    }
     return (
       <div className="work-exp">
         <label htmlFor="comp-name">Company Name:</label>
