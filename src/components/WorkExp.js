@@ -34,8 +34,13 @@ class WorkExp extends React.Component {
     if (this.props.submitted) {
       return (
         <div className="work-exp">
-          <p>Company Name:</p>
-          <p>{this.state.companyName}</p>
+          <div className="work-info-submitted">
+            <p className="work-period">
+              {this.state.workFrom}–{this.state.workTo}
+            </p>
+            <p className="position-title">{this.state.positionTitle}</p>
+            <p className="company-name">{this.state.companyName}</p>
+          </div>
         </div>
       );
     }
@@ -79,7 +84,7 @@ class WorkExp extends React.Component {
           onChange={this.handleInputChange}
         ></input>
 
-        <button type="button" className="delete-section" onClick={this.handleDeletion}>
+        <button type="button" className="delete-position-btn" onClick={this.handleDeletion}>
           Delete
         </button>
       </div>

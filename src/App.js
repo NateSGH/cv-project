@@ -15,7 +15,7 @@ class App extends React.Component {
       email: '',
       workExpComponents: [{ id: 1 }],
       educationExpComponents: [{ id: 1 }],
-      submitted: false,
+      isSubmitted: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,11 +40,12 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('You clicked submit.');
-    this.setState({ submitted: true });
+    this.setState({ isSubmitted: true });
   }
 
   handleEdit() {
-    this.setState({ submitted: false });
+    console.log('You clicked edit.');
+    this.setState({ isSubmitted: false });
   }
 
   addWorkExp() {
@@ -97,18 +98,15 @@ class App extends React.Component {
   };
 
   render() {
+    const isSubmitted = this.state.isSubmitted;
+
     return (
       <div className="App">
         <Header title="CV Application" />
         <div className="main-content">
           <form className="cv-form" onSubmit={this.handleSubmit}>
             <div className="general-info">
-              <GeneralInfo
-                fullName={this.state.fullName}
-                phoneNumber={this.state.phoneNumber}
-                email={this.state.email}
-                handleInputChange={this.handleInputChange}
-              />
+              <GeneralInfo submitted={isSubmitted} />
             </div>
             <div className="work-info">
               <h2>Work Experience</h2>
@@ -118,10 +116,10 @@ class App extends React.Component {
                   key={item.id}
                   id={item.id}
                   delete={this.deleteExp}
-                  submitted={this.state.submitted}
+                  submitted={isSubmitted}
                 />
               ))}
-              {this.state.submitted === false && (
+              {isSubmitted === false && (
                 <button type="button" className="add-btn" onClick={this.addWorkExp}>
                   Add
                 </button>
@@ -135,19 +133,28 @@ class App extends React.Component {
                   key={item.id}
                   id={item.id}
                   delete={this.deleteExp}
-                  submitted={this.state.submitted}
+                  submitted={isSubmitted}
                 />
               ))}
-              <button type="button" className="add-btn" onClick={this.addEducationExp}>
-                Add
-              </button>
+              {isSubmitted === false && (
+                <button type="button" className="add-btn" onClick={this.addEducationExp}>
+                  Add
+                </button>
+              )}
             </div>
-            <button type="submit">Submit</button>
-            <button type="button" onClick={this.handleEdit}>
-              Edit
-            </button>
+            <div className="form-btns">
+              {isSubmitted && (
+                <button type="button" id="edit-btn" onClick={this.handleEdit}>
+                  Edit
+                </button>
+              )}
+              {isSubmitted === false && (
+                <button type="submit" id="submit-btn">
+                  Submit
+                </button>
+              )}
+            </div>
           </form>
-          <p>{this.state.fullName}</p>
         </div>
       </div>
     );

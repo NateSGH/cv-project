@@ -34,8 +34,13 @@ class EducationExp extends React.Component {
     if (this.props.submitted) {
       return (
         <div className="education-exp">
-          <p>School Name:</p>
-          <p>{this.state.schoolName}</p>
+          <div className="education-info-submitted">
+            <p className="study-period">
+              {this.state.studyFrom}–{this.state.studyTo}
+            </p>
+            <p className="study-title">{this.state.studyTitle}</p>
+            <p className="school-name">{this.state.schoolName}</p>
+          </div>
         </div>
       );
     }
@@ -80,7 +85,7 @@ class EducationExp extends React.Component {
           onChange={this.handleInputChange}
         ></input>
 
-        <button type="button" className="delete-section" onClick={this.handleDeletion}>
+        <button type="button" className="delete-position-btn" onClick={this.handleDeletion}>
           Delete
         </button>
       </div>
