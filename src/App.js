@@ -21,6 +21,7 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.addExpPosition = this.addExpPosition.bind(this);
     this.addWorkExp = this.addWorkExp.bind(this);
     this.addEducationExp = this.addEducationExp.bind(this);
     this.deleteExp = this.deleteExp.bind(this);
@@ -48,25 +49,39 @@ class App extends React.Component {
     this.setState({ isSubmitted: false });
   }
 
-  addWorkExp() {
+  addExpPosition(section) {
     this.setState((state) => {
-      let componentId = state.workExpComponents[state.workExpComponents.length - 1].id + 1;
+      let componentId = 1;
+      let stateSection = '';
 
-      return {
-        workExpComponents: state.workExpComponents.concat([{ id: componentId }]),
-      };
+      if ((section = 'work')) {
+        stateSection = state.workExpComponents;
+      } else {
+        stateSection = state.educationExpComponents;
+      }
+
+      if (stateSection.length !== 0) {
+        componentId = stateSection[stateSection.length - 1].id + 1;
+      }
+
+      if ((section = 'work')) {
+        return {
+          workExpComponents: stateSection.concat([{ id: componentId }]),
+        };
+      } else {
+        return {
+          educationExpComponents: stateSection.concat([{ id: componentId }]),
+        };
+      }
     });
   }
 
-  addEducationExp() {
-    this.setState((state) => {
-      let componentId =
-        state.educationExpComponents[state.educationExpComponents.length - 1].id + 1;
+  addWorkExp() {
+    this.addExpPosition('work');
+  }
 
-      return {
-        educationExpComponents: state.educationExpComponents.concat([{ id: componentId }]),
-      };
-    });
+  addEducationExp() {
+    this.addExpPosition('education');
   }
 
   deleteExp = (section, id) => {
