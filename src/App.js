@@ -3,6 +3,7 @@ import GeneralInfo from './components//GeneralInfo';
 import WorkExp from './components/WorkExp';
 import EducationExp from './components/EducationExp';
 import React from 'react';
+import ReactToPrint from 'react-to-print';
 import './styles/App.css';
 
 class App extends React.Component {
@@ -121,7 +122,7 @@ class App extends React.Component {
         <div className="main-content">
           <form className="cv-form" onSubmit={this.handleSubmit}>
             <div className="general-info">
-              <GeneralInfo submitted={isSubmitted} />
+              <GeneralInfo submitted={isSubmitted} ref={(el) => (this.componentRef = el)} />
             </div>
             <div className="work-info">
               <h2>Work Experience</h2>
@@ -163,6 +164,20 @@ class App extends React.Component {
                   Edit
                 </button>
               )}
+
+              {isSubmitted && (
+                <ReactToPrint
+                  trigger={() => {
+                    return (
+                      <button type="button" id="print-btn">
+                        Print
+                      </button>
+                    );
+                  }}
+                  content={() => this.componentRef}
+                />
+              )}
+
               {isSubmitted === false && (
                 <button type="submit" id="submit-btn">
                   Submit
