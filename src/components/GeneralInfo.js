@@ -27,7 +27,7 @@ class GeneralInfo extends React.Component {
   render() {
     if (this.props.submitted) {
       return (
-        <div className="general-info">
+        <div className="general-info-submitted">
           <p className="full-name">{this.state.fullName}</p>
           <p className="phone">
             <i className="fas fa-phone-alt"></i> {this.state.phoneNumber}

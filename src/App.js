@@ -121,42 +121,44 @@ class App extends React.Component {
         <Header title="CV Application" />
         <div className="main-content">
           <form className="cv-form" onSubmit={this.handleSubmit}>
-            <div className="general-info">
-              <GeneralInfo submitted={isSubmitted} ref={(el) => (this.componentRef = el)} />
-            </div>
-            <div className="work-info">
-              <h2>Work Experience</h2>
+            <div id="form-main-content" ref={(el) => (this.componentRef = el)}>
+              <div className="general-info">
+                <GeneralInfo submitted={isSubmitted} />
+              </div>
+              <div className="work-info">
+                <h2>Work Experience</h2>
 
-              {this.state.workExpComponents.map((item) => (
-                <WorkExp
-                  key={item.id}
-                  id={item.id}
-                  delete={this.deleteExp}
-                  submitted={isSubmitted}
-                />
-              ))}
-              {isSubmitted === false && (
-                <button type="button" className="add-btn" onClick={this.addWorkExp}>
-                  Add
-                </button>
-              )}
-            </div>
-            <div className="education-info">
-              <h2>Education Experience</h2>
+                {this.state.workExpComponents.map((item) => (
+                  <WorkExp
+                    key={item.id}
+                    id={item.id}
+                    delete={this.deleteExp}
+                    submitted={isSubmitted}
+                  />
+                ))}
+                {isSubmitted === false && (
+                  <button type="button" className="add-btn" onClick={this.addWorkExp}>
+                    Add
+                  </button>
+                )}
+              </div>
+              <div className="education-info">
+                <h2>Education Experience</h2>
 
-              {this.state.educationExpComponents.map((item) => (
-                <EducationExp
-                  key={item.id}
-                  id={item.id}
-                  delete={this.deleteExp}
-                  submitted={isSubmitted}
-                />
-              ))}
-              {isSubmitted === false && (
-                <button type="button" className="add-btn" onClick={this.addEducationExp}>
-                  Add
-                </button>
-              )}
+                {this.state.educationExpComponents.map((item) => (
+                  <EducationExp
+                    key={item.id}
+                    id={item.id}
+                    delete={this.deleteExp}
+                    submitted={isSubmitted}
+                  />
+                ))}
+                {isSubmitted === false && (
+                  <button type="button" className="add-btn" onClick={this.addEducationExp}>
+                    Add
+                  </button>
+                )}
+              </div>
             </div>
             <div className="form-btns">
               {isSubmitted && (
